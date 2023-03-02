@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Boostrap CDN Link -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+        <!-- The block JinJa code that allow other html to override this -->
+        <title>{% block title %}CRUD WEBSITE{% endblock %}</title>
+
+        <!-- CSS reference link -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+    </head>
+    <body>
+        <!-- Creating a nav bar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!-- Center the navbar button -->
+            <div class="container justify-content-center">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbar"
+                ><span class="navbar-toggler-icon"></span></button>
+                <!-- navigation item for our navbar-->
+                <div class="collapse navbar-collapse" id="navbar">
+                    <div class="navbar-nav text-center mx-auto">
+                        <a class="nav-item nav-link" id="student" href="/">Student</a>
+                        <a class="nav-item nav-link" id="course" href="/course">Course</a>
+                        <a class="nav-item nav-link" id="instructor" href="/instructor">Instructor</a>
+                        <a class="nav-item nav-link" id="enrollment" href="/enrollment">Enrollment</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Get all the flashed messages and display them appropriately -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        <!-- Check to see if there are any messages -->
+        {% if messages %}
+            {% for category, message in messages %}
+                <!-- Checking for success vs error flash -->
+                {% if category == "error" %}
+                    <div class="alert alert-danger alert-dismissable fade show" role="alert">
+                        {{ message }}
+                        <!-- Fancy close button-->
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-success alert-dismissable fade show" role="alert">
+                        {{ message }}
+                        <!-- Fancy close button-->
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!-- A div for other page to override such as student.html, course.html, instructor.html-->
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+
+        <!-- Script for Javascript and Bootstrap animation -->
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- This script load up our javascript page on our website -->
+        <script
+            type="text/javascript"
+            src="{{ url_for('static', filename='index.js') }}"
+        ></script>
+    </body>
+</html>

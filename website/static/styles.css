@@ -1,0 +1,23 @@
+/* These three CSS attr is to space and widen the button of the Nav Bar*/
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 20px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+/* Spacing */
+h3 {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
